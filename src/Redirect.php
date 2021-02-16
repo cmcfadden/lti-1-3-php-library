@@ -18,8 +18,7 @@ class Redirect
 
     public function doRedirect()
     {
-        header('Location: ' . $this->location, true, 302);
-        die;
+        return redirect($this->location);
     }
 
     public function doHybridRedirect(Cookie $cookie)
