@@ -11,6 +11,7 @@ class LtiGrade
     private $timestamp;
     private $user_id;
     private $submission_review;
+    private $custom = [];
 
     public function __construct(array $grade = null)
     {
@@ -119,9 +120,19 @@ class LtiGrade
         return $this;
     }
 
+    public function getCustom(): array 
+    {
+        return $this->custom;
+    }
+
+    public function setCustom(array $value) {
+        $this->custom = $value;
+        return $this;
+    }
+
     public function __toString()
     {
-        return json_encode(array_filter([
+        return json_encode(array_merge(array_filter([
             'scoreGiven' => 0 + $this->score_given,
             'scoreMaximum' => 0 + $this->score_maximum,
             'comment' => $this->comment,
@@ -130,6 +141,6 @@ class LtiGrade
             'timestamp' => $this->timestamp,
             'userId' => $this->user_id,
             'submissionReview' => $this->submission_review,
-        ]));
+        ]), $this->custom));
     }
 }
