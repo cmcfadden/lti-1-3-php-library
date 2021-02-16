@@ -22,6 +22,9 @@ class LtiAssignmentsGradesService
         if ($lineitem !== null && empty($lineitem->getId())) {
             $lineitem = $this->findOrCreateLineitem($lineitem);
             $score_url = $lineitem->getId();
+        }
+        else if ($lineitem !== null && !empty($lineitem->getId())) {
+            $score_url = $lineitem->getId();
         } else if ($lineitem === null && !empty($this->service_data['lineitem'])) {
             $score_url = $this->service_data['lineitem'] ;
         } else {
